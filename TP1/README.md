@@ -46,3 +46,21 @@ Un Dockerfile permet de decrire toute la configuration dans un fichier. On peut 
 ## 2. Difference entre une image Docker et un conteneur Docker
 
 Une image Docker contient l'application, les dependances et la configuratio alors que le conteneur Docker est une image instanciée, en cours d'exécution.
+
+## Étape 4
+
+## 1. Pourquoi Docker Compose est-il preferable au lancement manuel de plusieurs conteneurs ?
+
+Docker Compose permet de lancer plusieurs conteneurs avec une seule commande.
+La meme configuration pour tout le projet (pratique si plusieurs services).
+Il permet aussi de faire la liaison entre les noms services (exemple addition) et leur adresse sur le réseau Docker
+
+## 2. Quel est le role du fichier docker-compose.yml ?
+
+Le fichier docker-compose.yml decrit l'architecture des conteneurs d'une application, ici l'ensembles des micro services de la calculatrice.
+
+## 3. Dans quels cas Docker Compose pourrait-il montrer ses limites ?
+
+Docker Compose est surtout adapté à des projets simples ou moyens.
+Pour une grosse application en production, il peut devenir limite, et n'a pas de mécanisme de gestion des charges (upscaling par exemple). Il est également peu adapté pour gerer beaucoup de serveurs (utilisation de Kubernetes pour compenser).
+
