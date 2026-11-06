@@ -21,15 +21,15 @@ Sans IP flottante associée, le paquet n'atteint jamais la machine virtuelle sur
 
 ## 1. Quelles sont les étapes nécessaires pour pouvoir se connecter en SSH à une nouvelle machine virtuelle OpenStack depuis la machine hôte ?
 
-...
+Créer une paire de clés SSH lors de la création de la VM, lui associer une IP flottante, autoriser le trafic SSH dans le groupe de sécurité, puis se connecter avec la commande ssh -i.
 
 ## 2. Quel est le rôle de l’adresse IP privée, de l’adresse IP flottante et des Groupes de Sécurité dans cette connexion ?
 
-...
+L'IP privée permet la communication au sein du réseau privé. L'IP flottante rend la VM accessible depuis l'extérieur. Les groupes de sécurité filtrent le trafic réseau autorisé, notamment les connexions SSH.
 
 ## 3. Pourquoi OpenStack distingue-t-il une adresse IP privée d’une IP flottante publique, plutôt que d’attribuer directement une adresse publique à chaque machine virtuelle ?
 
-...
+Cela permet d'économiser les adresses IP publiques celles-ci étant en quantité limitée, de renforcer l'isolation des VM et de réattribuer facilement une IP flottante à une autre machine virtuelle.
 
 ---
 
