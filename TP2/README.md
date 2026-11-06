@@ -2,15 +2,18 @@
 
 ## 1. Quel est le rôle d’un réseau privé dans une infrastructure Cloud ? D’un routeur externe ?
 
-...
+Un réseau privé permet de faire communiquer les machines virtuelles entre elles tout en les isolant du réseau public.
+Le routeur externe permet de relier ce réseau privé au réseau public et de rendre certaines VM accessibles depuis l'extérieur grâce aux IP flottantes.
 
 ## 2. Pourquoi un fournisseur Cloud propose-t-il autant de catégories de ressources différentes ?
 
-...
+OpenStack est une plateforme IaaS (Infrastructure as a Service) qui fournit différentes ressources (VM, réseaux, routeurs, stockage, etc.) afin de permettre aux utilisateurs de construire et configurer leur propre infrastructure.
+La réponse est donc pour le contrôle fin sur l'ensemble de la chaine de déploiement.
 
 ## 3. En observant la topologie générée par OpenStack, expliquez le chemin emprunté par un paquet réseau envoyé depuis l’extérieur vers une machine virtuelle sur net-discovery.
 
-...
+Le paquet arrive par le réseau public, passe par le routeur externe, qui utilise l'IP flottante pour le rediriger vers l'adresse IP privée de la VM sur net-discovery (via DNAT).
+Sans IP flottante associée, le paquet n'atteint jamais la machine virtuelle sur net-discovery.
 
 ---
 
