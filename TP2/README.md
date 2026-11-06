@@ -37,11 +37,11 @@ Cela permet d'économiser les adresses IP publiques celles-ci étant en quantit�
 
 ## 1. Pourquoi les Security Groups sont-ils indispensables même lorsqu’une machine virtuelle possède une adresse IP publique ?
 
-...
+Les Security Groups filtrent le trafic entrant et sortant. Une IP publique ne suffit donc pas à rendre un service accessible : il faut également autoriser le port utilisé, ici le port TCP 5000.
 
 ## 2. Décrivez le chemin parcouru par une requête HTTP envoyée depuis votre ordinateur jusqu’à l’application hello-api exécutée sur votre machine virtuelle.
 
-...
+La requête arrive sur l'IP flottante via le réseau public, passe par le routeur OpenStack, puis est redirigée vers l'IP privée de la VM. Le groupe de sécurité autorise le trafic TCP sur le port 5000, permettant à la requête d'atteindre l'application hello-api.
 
 ---
 
