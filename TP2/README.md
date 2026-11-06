@@ -49,13 +49,14 @@ La requête arrive sur l'IP flottante via le réseau public, passe par le routeu
 
 ## 1. Quelles différences existe-il entre une image officielle et un snapshot ?
 
-...
+Une image officielle fournit un système d'exploitation vierge et standardisé. Un snapshot sauvegarde l'état d'une VM existante, avec ses installations et configurations.
 
 ## 2. Quels avantages apporte le redimensionnement d’une machine virtuelle dans un environnement Cloud ?
 
-...
+Il permet d'adapter les ressources (CPU, RAM) aux besoins de l'application sans avoir à recréer entièrement la machine virtuelle.
+Par exemple pour s'adapter à une charge soudaine.
 
 ## 3. Dans quels contextes un administrateur système préférera-t-il créer une nouvelle machine à partir d’un snapshot plutôt que de repartir d’une image vierge ?
 
-...
+Lorsqu'il souhaite reproduire rapidement une machine déjà configurée, conserver son environnement logiciel ou déployer plusieurs VM identiques.
 
