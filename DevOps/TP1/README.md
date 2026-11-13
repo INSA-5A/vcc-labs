@@ -2,15 +2,35 @@
 
 ## 1. Quel est le rôle de VM-K8s dans l’architecture mise en place ? Quelle est la différence entre cette machine et les nœuds workers ?
 
-...
+VM-K8s est l'orchestrateur, il organise et gère les tâches à effectuer tandis que les workers sont les exécutants. Ils s'occupent de réaliser les tâches que le master leurs attribue.
 
 ## 2. Pourquoi le Docker Registry et le master Kubernetes sont-ils installés sur deux VMs différentes ?
 
-...
+Le Registry conserve et distribue les images Docker. VM-K8s s'occume de gérer ces images. Les séparer permet de libérer les ressources de chaque VM pour qu'elle puisse se concentrer sur ses propres tâches.
 
 ## 3. Le script d’installation vous a permis d’installer Kubernetes sans exécuter manuellement toutes les commandes nécessaires. Citez les opérations importantes réalisées par le script master et expliquez très brièvement en quoi elles sont nécessaires au fonctionnement du cluster.
 
-...
+
+1 - Désactivation du swap :
+la configuration mémoire attendue.
+
+2 - Configuration du noyau et du network :
+Activation du transfert IP nécessaire au fonctionnement du réseau des conteneurs.
+
+3 - Installation de containerd :
+Exécute les conteneurs, avec une gestion des ressources 
+
+4 - Installation de kubelet, kubeadm et kubectl :
+ Gérer les Pods, initialiser le cluster et l’administrer. 
+
+5 - Initialisation avec kubeadm init :
+Configure le plan de contrôle, l’adresse de l’API et la plage d’adresses des Pods.
+
+6 - Configuration de kubectl :
+Donne les accès administrateur, pour pouvoir gérer le cluster.
+
+7 - Génération de la commande de rattachement :
+Permet aux workers de rejoindre le cluster.
 
 ---
 
