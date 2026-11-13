@@ -38,15 +38,19 @@ Permet aux workers de rejoindre le cluster.
 
 ## 1. Quel est le rôle d’un Deployment dans Kubernetes ? Pourquoi ne déploie-t-on pas directement un Pod ?
 
-...
+Un Deployment maintient le nombre de Pods souhaité et permet des mises à jour progressives.
+L'intérêt de passer par un deployment est qu'il assure le remplacement du pod en cas de panne par exemple.
 
 ## 2. Quelle est la différence entre une image Docker, un Pod et un Deployment ? Comment les 3 sont-ils liés ?
 
-...
+L’image Docker contient l’application et ses dépendances pour l’exécuter de façon reproductible.
+Le Pod héberge les conteneurs issus de cette image.
+Le Deployment gère les Pods pour faciliter leur réplication, leur remplacement et leurs mises à jour.
 
 ## 3. Expliquez le principe de réconciliation. Quelle composante Kubernetes est responsable de ce comportement ?
 
-...
+La réconciliation veille sur la différence entre l’état réel à l’état souhaité et corrige les écarts, par exemple en recréant un Pod manquant.
+Ce sont les contrôleurs du kube-controller-manager, notamment Deployment et ReplicaSet, qui automatisent le maintien de l’application.
 
 ---
 
