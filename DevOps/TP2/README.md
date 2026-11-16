@@ -34,13 +34,18 @@ Pour utiliser un Webhook GitHub il faut :
 
 ## 1. Pourquoi Jenkins doit-il disposer d’un accès à l’API Kubernetes ?
 
-...
+Jenkins doit accéder à l’API Kubernetes pour appliquer les manifestes avec kubectl apply. Cela lui permet de créer ou mettre à jour les Deployments et Services automatiquement.
 
 ## 2. Quelles étapes du job Jenkins correspondent à la CI, et lesquelles correspondent à la CD ?
 
-...
+La CI correspond à la récupération du code Git et au build des images Docker (et tests si existants). La CD correspond à leur publication dans le Registry et leur déploiement sur Kubernetes. 
 
 ## 3. Quel est le parcours d’une modification du code source depuis le "git push" jusqu’à l’application Calculator ? Pour chaque étape, indiquez l’outil ou la technologie qui intervient.
 
-...
+Le parcours d’une modification est le suivant :
+- Git/GitHub : le développeur push son commit avec git push.
+- Jenkins : le polling détecte le changement et déclenche le pipeline.
+- Docker : Jenkins construit les cinq images puis les publie dans le Registry.
+- kubectl/API Kubernetes : Jenkins applique les manifestes de déploiement.
+- Kubernetes : si la référence de l’image a changé dans le Deployment, il remplace progressivement les Pods par ceux utilisant la nouvelle version.
 
