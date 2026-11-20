@@ -13,7 +13,7 @@ Cela permet aussi de les rendre indépendants, si la VM de l'un ne fonctionne pl
 
 
 1 - Désactivation du swap :
-la configuration mémoire attendue.
+le système de swap rends la mémoire non prévisible et peux dégrader considérablement le service d'un worker sans provoquer de changements.
 
 2 - Configuration du noyau et du network :
 Activation du transfert IP nécessaire au fonctionnement du réseau des conteneurs.
