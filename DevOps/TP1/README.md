@@ -7,6 +7,7 @@ VM-K8s est l'orchestrateur, il organise et gère les tâches à effectuer tandis
 ## 2. Pourquoi le Docker Registry et le master Kubernetes sont-ils installés sur deux VMs différentes ?
 
 Le Registry conserve et distribue les images Docker. VM-K8s s'occume de gérer ces images. Les séparer permet de libérer les ressources de chaque VM pour qu'elle puisse se concentrer sur ses propres tâches.
+Cela permet aussi de les rendre indépendants, si la VM de l'un ne fonctionne plus, elle n'impacte pas l'autre.
 
 ## 3. Le script d’installation vous a permis d’installer Kubernetes sans exécuter manuellement toutes les commandes nécessaires. Citez les opérations importantes réalisées par le script master et expliquez très brièvement en quoi elles sont nécessaires au fonctionnement du cluster.
 
