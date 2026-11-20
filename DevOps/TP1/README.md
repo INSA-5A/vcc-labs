@@ -40,7 +40,8 @@ Permet aux workers de rejoindre le cluster.
 ## 1. Quel est le rôle d’un Deployment dans Kubernetes ? Pourquoi ne déploie-t-on pas directement un Pod ?
 
 Un Deployment maintient le nombre de Pods souhaité et permet des mises à jour progressives.
-L'intérêt de passer par un deployment est qu'il assure le remplacement du pod en cas de panne par exemple.
+L'intérêt de passer par un deployment est qu'il assure le remplacement du pod en cas de panne par exemple,
+c'est une approche basée sur l'expression de l'état souhaité.
 
 ## 2. Quelle est la différence entre une image Docker, un Pod et un Deployment ? Comment les 3 sont-ils liés ?
 
@@ -59,17 +60,17 @@ Ce sont les contrôleurs du kube-controller-manager, notamment Deployment et Rep
 
 ## 1. Pourquoi ne peut-on pas simplement utiliser l’adresse IP du Pod calculator-calc pour permettre à un utilisateur d’accéder à l’application ?
 
-L'ip d'un pod change lorsqu'il est recrée.
+L'ip d'un pod est dynamique, elle peut être changée lorsque le pod est recréé par exemple
 
 ## 2. Comment Kubernetes sait-il que le Service calculator-calc doit transmettre les requêtes au Pod de calculator-calc ?
 
-Au donne des labels au pods qui orrespondent au app:name ainsi le registre/DNS de Kubernetes peut orienter les paquets vers le pod associé.
+On donne des labels aux pods qui correspondent à app:name ainsi le registre/DNS de Kubernetes peut orienter les paquets vers le pod associé.
 
 ## 3. Quelle est la différence entre le port exposé, le port cible et le NodePort utilisés dans votre architecture ?
 
 Port exposé : Le port de contact (acessible depuis "l'exterieur")
-Port cible : Port sur lequel l'application ecoute dans le pod (ici 5000X) 
-NodePORT : Permet d'accéder aux services depuis l'exterieur (port utilise pour le curl du sujet) en exposant un service sur un port de la VM qui heberge le noeud.
+Port cible : Port sur lequel l'application ecoute dans le pod (ici 5000X)
+NodePORT : Port ouvert sur les noeuds du cluster, il permet d'accéder au service depuis l'extérieur en utilisant l'IP d'un noeud et ce port.
 
 ---
 
@@ -77,13 +78,17 @@ NodePORT : Permet d'accéder aux services depuis l'exterieur (port utilise pour 
 
 ## 1. Pourquoi les quatre microservices utilisent-ils un port de type ClusterIP, tandis que calc-service utilise un port de type NodePort ?
 
-ClusterIP est un type de ressource Kubernetes qui permet à un service de se voir attribuer une IP valide uniquement dans le cluster. Ca protege les services de l'exterieur pour qu'ils ne soient joignables que par l'application. Un utilisateur lui n'a acces depuis l'exterieur qu'à l'application et pas aux services.
+ClusterIP est un type de service Kubernetes qui permet à un service de se voir attribuer une IP valide uniquement dans le cluster.
+Il est utile dans notre cas pour garantir que les pods communiquent entre eux au sein du cluster.
+calc-service de son côté utilise un type NodePort car c'est le service qui permet l'accessibilité de l'application depuis l'extérieur.
 
 ## 2. comment Kubernetes permet-il au frontend de contacter le backend sans connaître l’adresse IP du Pod ?
 
-Il utilise le DNS de son service (http://sum-service:50001). L'ip n'est donc plus nécessaire.
+Il utilise le DNS de son service (http://sum-service:50001).
+L'ip n'est donc plus nécessaire.
 
 ## 3. On propose de configurer le frontend avec l’adresse IP actuelle des Pods backend (sum, sub...), par exemple "http ://10.x.x.x :<PORT>". Pourquoi cette solution n’est-elle pas adaptée à Kubernetes ?
 
-L'ip d'un pod peut changer après suppression, et un pod n'est pas une ressource permanente. Après suppression le nouveau pod ne sera plus joignable par IP alors qu'en revanche le nom ne change pas.
+L'ip d'un pod peut changer après suppression par exemple, et un pod est une ressource temporaire.
+Après suppression le nouveau pod ne sera plus joignable par IP alors qu'en revanche le nom ne change pas.
 
